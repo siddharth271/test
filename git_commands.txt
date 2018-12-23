@@ -1,0 +1,44 @@
+- While making some commit if we have given a wrong message then -- we can change the message by --
+		git commit --amend -m "new message"
+
+- For changing some older commit message --
+		git rebase -i HEAD~n
+		git rebase -i HEAD~3   for last 3 commits 
+			it will show last 3commits, so replace the pick with rework in front of commit you want to change and save. in each resulting commit file change the commit message and save.
+			but using this will change the hash or the git commit history, so not recommended once changes are pushed.
+
+
+
+- Accidently commited to a different branch.
+		Use cherry-pick to create a new commit based on original 
+		copy the hash from committed branch
+		checkout branch
+		git cherry-pick hash
+		git log to check 
+
+TO delete the initial commit on other branch 
+		git reset --soft hash  -> remove commit but keep it staged
+		git reset 		-> remove commit and make it unstaged
+		git reset --hard	-> remove commit and staging too it leaves the untracked files as it is.
+
+		to get rid of untracked/unstaged files --- git clean -df  (- d for directory,  -f for files)
+
+
+If by mistake you have done git reset and removed some imp commits then it can be reverted back --
+		git reflog shows commits (or activities) in the order in which you last referenced them.
+		so if accedently u got rid of the files you dint wanted to --> 
+		copy the hash before that reset from reflogs and then run --> git checkout hash.
+
+
+If code is pushed and you want to undo some commit then use revert. It creates a new commit to reverse the effect of some earlier commit.
+
+
+
+GIt stash --> If you are not ready to commit perticular changes but save it for later commit. 
+		git stash save "message reminder"
+		it will not show in status now.
+		to see the stashed content --		git stash list
+		to bring these changes back --> git stash apply stash no (from list)
+		But this will also keep the stash , will not delete it from stash.
+
+		Use git stash pop --> it grab first stash in list , apply changes and then drop that stash.                                                                                                                                                                                                                                                                                                                                            
